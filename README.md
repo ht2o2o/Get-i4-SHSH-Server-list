@@ -5,7 +5,7 @@
 查询：?ecid=000003CA1116352D&model=iPhone3,1
 下载：?ecid=000003CA1116352D&model=iPhone3,1&osver=10A523
 
-#注意！Warning!
+# 注意！Warning!
 请在php同一个目录下创建 shsh 文件夹，不然没法下载shsh
 
 # 致谢
