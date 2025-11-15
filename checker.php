@@ -61,8 +61,8 @@ try {
         foreach ($result['list'] as $item) {
             if (isset($item['ios'])) {
                 $versions[] = [
+				    'osver_build' => isset($item['ios_order']) ? $item['ios_order'] : $item['ios']
                     'osver' => $item['ios'],
-                    'osver_build' => isset($item['ios_order']) ? $item['ios_order'] : $item['ios']
                 ];
             }
         }
