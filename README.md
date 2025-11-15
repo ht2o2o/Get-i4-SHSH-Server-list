@@ -6,3 +6,6 @@
 
 # 呃呃
 目前只是查看你的设备在爱思SHSH服务器有哪些SHSH保存，不能下载
+
+# 致谢
+感谢 https://github.com/j1ans/SHSHChecker 提供的思路
