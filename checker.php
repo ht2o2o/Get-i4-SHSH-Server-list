@@ -1,15 +1,13 @@
 <?php
 
 header('Content-Type: application/json; charset=utf-8');
-
-// 获取参数
 $ecid = isset($_GET['ecid']) ? $_GET['ecid'] : (isset($_POST['ecid']) ? $_POST['ecid'] : '');
 $model = isset($_GET['model']) ? $_GET['model'] : (isset($_POST['model']) ? $_POST['model'] : '');
 
 if (empty($ecid) || empty($model)) {
     echo json_encode([
         'success' => false,
-        'error' => '参数不完整',
+        'error' => '缺少必要参数：ecid 和 model',
         'versions' => []
     ], JSON_UNESCAPED_UNICODE);
     exit;
@@ -18,13 +16,12 @@ if (empty($ecid) || empty($model)) {
 if (!preg_match('/^[0-9a-fA-F]+$/', $ecid)) {
     echo json_encode([
         'success' => false,
-        'error' => 'ECID格式错误，应该为16进制数',
+        'error' => 'ECID格式错误，应为16进制数',
         'versions' => []
     ], JSON_UNESCAPED_UNICODE);
     exit;
 }
 
-// 16 to dec
 $ecid_decimal = hexdec($ecid);
 
 try {
@@ -35,13 +32,14 @@ try {
     ];
     
     $json_data = json_encode($encrypt_data, JSON_NUMERIC_CHECK);
+
     $key = '2015aisi1234sj7890smartflashi4pc';
     $encrypted_param = encrypt_3des_ecb($json_data, $key);
     
     if (!$encrypted_param) {
         throw new Exception('3DES加密失败');
     }
-    
+
     $encoded_param = urlencode($encrypted_param);
 
     $query_url = "https://i4tool2.i4.cn/requestBackupSHSHList.xhtml?param=" . $encoded_param;
@@ -63,8 +61,8 @@ try {
         foreach ($result['list'] as $item) {
             if (isset($item['ios'])) {
                 $versions[] = [
-                    'version1' => $item['ios'],
-                    'version2' => isset($item['ios_order']) ? $item['ios_order'] : $item['ios']
+                    'osver' => $item['ios'],
+                    'osver_build' => isset($item['ios_order']) ? $item['ios_order'] : $item['ios']
                 ];
             }
         }
@@ -92,8 +90,7 @@ try {
 
 function encrypt_3des_ecb($data, $key) {
     $method = 'DES-EDE3';
-    
-    // PKCS7填充
+
     $block_size = 8;
     $padding = $block_size - (strlen($data) % $block_size);
     $data .= str_repeat(chr($padding), $padding);
@@ -122,8 +119,7 @@ function http_request($url) {
         CURLOPT_SSL_VERIFYHOST => false,
         CURLOPT_USERAGENT => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
         CURLOPT_HTTPHEADER => [
-            'Accept: application/json, text/plain, */*',
-            'Referer: https://www.i4.cn/'
+            'Accept: application/json, text/plain, */*'
         ]
     ];
     
