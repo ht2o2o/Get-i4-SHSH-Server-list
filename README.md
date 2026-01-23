@@ -1,12 +1,12 @@
 ## Get-i4-SHSH-Server-list
-用了这个php，能让你从爱思服务器获取你在爱思shsh服务器存储的shsh的列表
+Using this PHP script, you can retrieve the list of SHSHs stored on your Aisi SHSH server from the Aisi server
 
-## 怎么使用？ How to use?
-1. 查询：?ecid=000003CA1116352D&model=iPhone3,1
-2. 下载：?ecid=000003CA1116352D&model=iPhone3,1&osver=10A523
+## How to use?
+1. Query: ecid=000003CA1116352D&model=iPhone3,1
+2. Download: ecid=000003CA1116352D&model=iPhone3,1&osver=10A523
 
-## 注意！Warning!
-请在php同一个目录下创建 shsh 文件夹，不然没法下载shsh
+## Attention! Warning!
+Please create a shsh folder in the same directory as your PHP files, otherwise you won't be able to download shsh
 
-## 致谢
-感谢 https://github.com/j1ans/SHSHChecker 提供的思路
+## Acknowledgements
+Thank you for the ideas provided by https://github.com/j1ans/SHSHChecker
